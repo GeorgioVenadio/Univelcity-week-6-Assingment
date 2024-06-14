@@ -5,9 +5,17 @@ import mail_icon from '../../assets/mail-icon.png'
 import phone_icon from '../../assets/phone-icon.png'
 import location_icon from '../../assets/location-icon.png'
 import white_arrow from '../../assets/white-arrow.png'
+import {ToastContainer, toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const Contact = () => {
     const [result, setResult] = React.useState("");
+
+    // useEffect (()=>{
+    //   toast.warning('This is sucessful')
+    //  })
+
+    const notify =()=> toast.success('Submitted sucessfully')
   
     const onSubmit = async (event) => {
       event.preventDefault();
@@ -26,12 +34,13 @@ const Contact = () => {
       if (data.success) {
         setResult("Form Submitted Successfully");
         event.target.reset();
+        
       } else {
         console.log("Error", data);
         setResult(data.message);
       }
     };
-  
+   
   
     return (
       <div className='contact'>
@@ -53,9 +62,10 @@ const Contact = () => {
         <input type="tel"  name='phone' placeholder='Enter your mobile number' required />      
         <label>Write your message here</label>
        <textarea name="message" rows='6' placeholder='enter your message' required></textarea>
-        <button type='submit' className='btn dark-btn'>Submit now <img src={white_arrow} alt="" /></button>
-        
+        <button type='submit' className='btn dark-btn' onClick={notify}>Submit now <img src={white_arrow} alt="" /></button>
+        <ToastContainer/>
         </form>
+
         <span>{result}</span>
   
       </div>
